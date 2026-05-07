@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+/* ── Google Fonts ── */
+/* @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,100..900;1,100..900&display=swap"); */
+
+/* ── CSS Custom Properties ── */
+:root {
+  --color-bg: #000000;
+  --color-accent: #4ade80;
+  --color-text-primary: rgba(255, 255, 255, 0.9);
+  --color-text-secondary: rgba(255, 255, 255, 0.6);
+  --color-text-muted: rgba(255, 255, 255, 0.3);
+
+  /* Font families */
+  --font-display: "Bebas Neue", "Arial Narrow", Arial, sans-serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+}
+
+/* ── Base Reset ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Ensure pixel-perfect scroll calculation */
+  scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Typography Utilities ── */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 99px;
+  opacity: 0.5;
+}
+
+/* ── Canvas performance hints ── */
+canvas {
+  will-change: contents;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* ── Selection color ── */
+::selection {
+  background-color: var(--color-accent);
+  color: #000;
+}
+
+/* ── Framer Motion: prevent layout shift on AnimatePresence ── */
+[data-framer-component-type] {
+  position: relative;
+}
+
+/* ── Tailwind layer extensions ── */
+@layer base {
+  /* Map Tailwind's font-display to our variable */
+  .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  /* Smooth gradient mask for text clamping */
+  .mask-fade-bottom {
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+
+  /* Accent glow */
+  .glow-accent {
+    box-shadow: 0 0 40px 0 rgba(74, 222, 128, 0.15);
+  }
+
+  /* Pixel-perfect 1px lines on retina */
+  .border-hairline {
+    border-width: 0.5px;
+  }
+}
