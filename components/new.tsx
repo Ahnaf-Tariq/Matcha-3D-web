@@ -40,7 +40,7 @@ const New = () => {
         </span>
       </a>
 
-      <div className="mt-24 grid grid-cols-3 gap-12 border-t border-white/5 pt-16 w-full max-w-lg">
+      <div className="mt-12 grid grid-cols-3 gap-12 border-t border-white/5 pt-8 w-full max-w-lg">
         {[
           { value: "100%", label: "Ceremonial Grade" },
           { value: "0g", label: "Added Sugar" },

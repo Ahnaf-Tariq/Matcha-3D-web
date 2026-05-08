@@ -63,6 +63,7 @@ function getFrameSrc(index: number): string {
 export default function MatchaCanvas() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const bitmapsRef = useRef<(ImageBitmap | null)[]>([]);
   const imagesRef = useRef<HTMLImageElement[]>([]);
   const rafRef = useRef<number | null>(null);
   const lastFrameRef = useRef<number>(-1);
@@ -74,36 +75,42 @@ export default function MatchaCanvas() {
   const { scrollYProgress } = useScroll({ target: wrapperRef });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 180,
+    damping: 40,
     restDelta: 0.0001,
   });
 
   useEffect(() => {
     let loaded = 0;
     const images: HTMLImageElement[] = new Array(TOTAL_FRAMES);
+    const bitmaps: (ImageBitmap | null)[] = new Array(TOTAL_FRAMES).fill(null);
+    bitmapsRef.current = bitmaps;
 
     for (let i = 0; i < TOTAL_FRAMES; i++) {
       const img = new Image();
-
       img.src = getFrameSrc(i + 1);
+      img.decoding = "async";
 
-      img.onload = () => {
+      const onDone = async () => {
+        if (img.complete && img.naturalWidth > 0) {
+          try {
+            bitmaps[i] = await createImageBitmap(img);
+          } catch {
+            bitmaps[i] = null;
+          }
+        }
         loaded++;
-
         setLoadProgress(Math.round((loaded / TOTAL_FRAMES) * 100));
-
         if (loaded === TOTAL_FRAMES) {
           imagesRef.current = images;
           setIsLoaded(true);
         }
       };
 
+      img.onload = onDone;
       img.onerror = () => {
         loaded++;
-
         setLoadProgress(Math.round((loaded / TOTAL_FRAMES) * 100));
-
         if (loaded === TOTAL_FRAMES) {
           imagesRef.current = images;
           setIsLoaded(true);
@@ -117,17 +124,17 @@ export default function MatchaCanvas() {
       images.forEach((img) => {
         if (img) img.src = "";
       });
+      bitmaps.forEach((bm) => {
+        if (bm) bm.close();
+      });
     };
   }, []);
 
   const drawFrame = useCallback((frameIndex: number) => {
     const canvas = canvasRef.current;
-    const img = imagesRef.current[frameIndex];
-
-    if (!canvas || !img || !img.complete) return;
+    if (!canvas) return;
 
     const ctx = canvas.getContext("2d");
-
     if (!ctx) return;
 
     const cssW = canvas.offsetWidth;
@@ -143,35 +150,39 @@ export default function MatchaCanvas() {
 
     ctx.clearRect(0, 0, pw, ph);
 
-    const imgW = img.naturalWidth;
-    const imgH = img.naturalHeight;
+    const bitmap = bitmapsRef.current[frameIndex];
+    const img = imagesRef.current[frameIndex];
+    const source: CanvasImageSource | null =
+      bitmap ?? (img?.complete ? img : null);
 
-    const scale = Math.max(pw / imgW, ph / imgH);
+    if (!source) return;
 
-    const drawW = imgW * scale;
-    const drawH = imgH * scale;
+    const srcW = bitmap ? bitmap.width : (img as HTMLImageElement).naturalWidth;
+    const srcH = bitmap
+      ? bitmap.height
+      : (img as HTMLImageElement).naturalHeight;
+
+    // Use the full source width and height to calculate the cover scale
+    const scale = Math.max(pw / srcW, ph / srcH);
+
+    const drawW = srcW * scale;
+    const drawH = srcH * scale;
 
     const offsetX = (pw - drawW) / 2;
     const offsetY = (ph - drawH) / 2;
 
-    ctx.drawImage(img, offsetX, offsetY, drawW, drawH);
+    ctx.drawImage(source, 0, 0, srcW, srcH, offsetX, offsetY, drawW, drawH);
   }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-
     if (!canvas) return;
 
-    const resize = () => {
-      if (lastFrameRef.current >= 0) {
-        drawFrame(lastFrameRef.current);
-      }
-    };
-
-    const ro = new ResizeObserver(resize);
+    const ro = new ResizeObserver(() => {
+      if (lastFrameRef.current >= 0) drawFrame(lastFrameRef.current);
+    });
 
     ro.observe(canvas);
-
     return () => ro.disconnect();
   }, [drawFrame]);
 
@@ -188,7 +199,6 @@ export default function MatchaCanvas() {
 
       if (frameIndex !== lastFrameRef.current) {
         lastFrameRef.current = frameIndex;
-
         drawFrame(frameIndex);
       }
 
@@ -204,9 +214,7 @@ export default function MatchaCanvas() {
     rafRef.current = requestAnimationFrame(loop);
 
     return () => {
-      if (rafRef.current !== null) {
-        cancelAnimationFrame(rafRef.current);
-      }
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
     };
   }, [isLoaded, smoothProgress, drawFrame]);
 

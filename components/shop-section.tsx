@@ -122,7 +122,7 @@ export default function ShopSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2, duration: 0.7 }}
-          className="mb-10 flex items-center justify-between"
+          className="mb-6 flex flex-col"
         >
           <h3 className="font-display text-3xl text-white/70">THE MENU</h3>
           <span className="text-[9px] tracking-[0.4em] uppercase text-white/30">

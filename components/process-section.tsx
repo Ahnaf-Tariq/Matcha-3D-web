@@ -50,12 +50,12 @@ export default function ProcessSection() {
       />
 
       {/* Section Header */}
-      <div className="px-5 sm:px-10 max-w-7xl mx-auto mb-12">
+      <div className="px-5 sm:px-10 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6"
+          className="mb-6 flex flex-col"
         >
           <div>
             <span className="text-[10px] tracking-[0.5em] uppercase text-[#4ADE80] mb-3 block">
@@ -74,64 +74,66 @@ export default function ProcessSection() {
       </div>
 
       {/* Steps grid */}
-      <div className="px-5 sm:px-10 max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/5">
-        {STEPS.map((step, i) => (
-          <motion.div
-            key={step.number}
-            initial={{ opacity: 0, y: 24 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{
-              delay: i * 0.12,
-              duration: 0.65,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            // Removed hover:bg and added "group" for child animations
-            className="bg-black p-8 flex flex-col gap-6 group relative overflow-hidden"
-          >
-            {/* NEW: Bottom-to-top background reveal */}
-            <div className="absolute inset-0 bg-[#071207] translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-[0.22,1,0.36,1]" />
-
-            {/* Existing Hover accent (Radial Gradient) */}
-            <div
-              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-              style={{
-                background:
-                  "radial-gradient(ellipse at 50% 100%, rgba(74,222,128,0.08) 0%, transparent 70%)",
+      <div className="mx-5 sm:mx-10">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 overflow-hidden border border-white/5">
+          {STEPS.map((step, i) => (
+            <motion.div
+              key={step.number}
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{
+                delay: i * 0.12,
+                duration: 0.65,
+                ease: [0.22, 1, 0.36, 1],
               }}
-            />
+              // Removed hover:bg and added "group" for child animations
+              className="bg-black p-8 flex flex-col gap-6 group relative overflow-hidden"
+            >
+              {/* NEW: Bottom-to-top background reveal */}
+              <div className="absolute inset-0 bg-[#071207] translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-[0.22,1,0.36,1]" />
 
-            {/* IMPORTANT: Wrap your content in a relative div 
+              {/* Existing Hover accent (Radial Gradient) */}
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                style={{
+                  background:
+                    "radial-gradient(ellipse at 50% 100%, rgba(74,222,128,0.08) 0%, transparent 70%)",
+                }}
+              />
+
+              {/* IMPORTANT: Wrap your content in a relative div 
     so it stays on top of the moving background 
   */}
-            <div className="relative z-10 flex flex-col h-full gap-6">
-              <div className="flex items-start justify-between">
-                <span className="font-display text-5xl text-white/10 group-hover:text-[#4ADE80]/20 transition-colors duration-500">
-                  {step.number}
-                </span>
-                <span className="text-[8px] tracking-[0.4em] uppercase border border-white/10 group-hover:border-[#4ADE80]/30 text-white/30 group-hover:text-[#4ADE80]/70 px-2.5 py-1 rounded-full transition-all duration-500">
-                  {step.tag}
-                </span>
+              <div className="relative z-10 flex flex-col h-full gap-6">
+                <div className="flex items-start justify-between">
+                  <span className="font-display text-5xl text-white/10 group-hover:text-[#4ADE80]/20 transition-colors duration-500">
+                    {step.number}
+                  </span>
+                  <span className="text-[8px] tracking-[0.4em] uppercase border border-white/10 group-hover:border-[#4ADE80]/30 text-white/30 group-hover:text-[#4ADE80]/70 px-2.5 py-1 rounded-full transition-all duration-500">
+                    {step.tag}
+                  </span>
+                </div>
+
+                <div className="mt-auto">
+                  <h3 className="font-display text-3xl text-white/90 leading-none mb-1">
+                    {step.title}
+                  </h3>
+                  <span className="text-[9px] tracking-[0.4em] uppercase text-[#4ADE80]/60 mb-4 block">
+                    {step.subtitle}
+                  </span>
+                  <p className="text-xs text-white/40 leading-relaxed font-light">
+                    {step.body}
+                  </p>
+                </div>
               </div>
 
-              <div className="mt-auto">
-                <h3 className="font-display text-3xl text-white/90 leading-none mb-1">
-                  {step.title}
-                </h3>
-                <span className="text-[9px] tracking-[0.4em] uppercase text-[#4ADE80]/60 mb-4 block">
-                  {step.subtitle}
-                </span>
-                <p className="text-xs text-white/40 leading-relaxed font-light">
-                  {step.body}
-                </p>
-              </div>
-            </div>
-
-            {/* Step connector line */}
-            {i < STEPS.length - 1 && (
-              <div className="absolute right-0 top-1/2 w-px h-8 bg-white/5 hidden lg:block -translate-y-1/2 z-20" />
-            )}
-          </motion.div>
-        ))}
+              {/* Step connector line */}
+              {i < STEPS.length - 1 && (
+                <div className="absolute right-0 top-1/2 w-px h-8 bg-white/5 hidden lg:block -translate-y-1/2 z-20" />
+              )}
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       {/* Bottom accent line */}

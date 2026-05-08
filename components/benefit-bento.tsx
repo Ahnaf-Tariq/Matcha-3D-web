@@ -70,12 +70,11 @@ export default function BenefitsBento() {
       ref={ref}
       className="relative py-10 px-5 sm:px-10 max-w-7xl mx-auto"
     >
-      {/* Section header */}
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6"
+        className="mb-6 flex flex-col"
       >
         <div>
           <span className="text-xs tracking-[0.5em] uppercase text-[#4ADE80] mb-2 block">

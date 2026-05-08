@@ -13,7 +13,7 @@ export default function Home() {
 
       <MatchaCanvas />
 
-      <div style={{ marginTop: "160px" }} className="space-y-10">
+      <div style={{ marginTop: "250px" }} className="space-y-10">
         <New />
         <BenefitsBento />
         <ExperienceSection />
@@ -21,7 +21,7 @@ export default function Home() {
         <ShopSection />
       </div>
 
-      <footer className="bg-black border-t border-white/5 py-10 px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <footer className="bg-black border-t border-white/5 p-10 flex flex-col sm:flex-row items-center justify-between gap-4">
         <span className="font-display text-sm tracking-[0.3em] text-white/30">
           SŌL MATCHA
         </span>

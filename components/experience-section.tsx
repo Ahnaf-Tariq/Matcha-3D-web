@@ -85,7 +85,7 @@ export default function ExperienceSection() {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-6"
+          className="mb-6 flex flex-col"
         >
           <div>
             <span className="text-[10px] tracking-[0.5em] uppercase text-[#4ADE80] mb-3 block">
@@ -98,7 +98,8 @@ export default function ExperienceSection() {
             </h2>
           </div>
           <p className="text-sm text-white/40 max-w-xs leading-relaxed font-light">
-            Over 50,000 orders shipped. Here's what they said.
+            Over 50,000 people orders our SŌL Matcha from all around the world.
+            Here's what they say.
           </p>
         </motion.div>
 
