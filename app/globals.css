@@ -36,6 +36,19 @@ body {
   cursor: none;
 }
 
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
 .font-display {
   font-family: var(--font-display);
   letter-spacing: 0.02em;
@@ -97,7 +110,10 @@ canvas {
   cursor: none !important;
 }
 
-/* ── Pixel rendering for SVG cursors ── */
+.custom-cursor {
+  will-change: transform;
+}
+
 .custom-cursor svg {
   image-rendering: pixelated;
   image-rendering: crisp-edges;
