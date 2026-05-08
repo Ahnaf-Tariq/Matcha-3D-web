@@ -13,7 +13,7 @@ export default function Home() {
 
       <MatchaCanvas />
 
-      <div style={{ marginTop: "100px" }} className="space-y-10">
+      <div style={{ marginTop: "160px" }} className="space-y-10">
         <New />
         <BenefitsBento />
         <ExperienceSection />

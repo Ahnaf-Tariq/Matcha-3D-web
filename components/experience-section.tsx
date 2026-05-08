@@ -133,7 +133,7 @@ export default function ExperienceSection() {
                 duration: 0.6,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="group relative rounded-2xl border border-white/8 bg-[#0A0A0A] p-7 flex flex-col gap-5 overflow-hidden hover:border-[#4ADE80]/20 transition-all duration-500"
+              className="group relative rounded-2xl border border-white/8 bg-[#0A0A0A] p-5 sm:p-7 flex flex-col gap-5 overflow-hidden hover:border-[#4ADE80]/20 transition-all duration-500"
             >
               {/* Glass highlight on hover */}
               <div

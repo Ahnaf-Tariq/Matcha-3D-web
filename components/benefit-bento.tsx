@@ -75,10 +75,10 @@ export default function BenefitsBento() {
         initial={{ opacity: 0, y: 24 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="mb-16 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6"
+        className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6"
       >
         <div>
-          <span className="text-[10px] tracking-[0.5em] uppercase text-[#4ADE80] mb-3 block">
+          <span className="text-xs tracking-[0.5em] uppercase text-[#4ADE80] mb-2 block">
             Why Sōl
           </span>
           <h2 className="font-display text-5xl sm:text-6xl md:text-7xl text-white/90 leading-none">
@@ -93,7 +93,6 @@ export default function BenefitsBento() {
         </p>
       </motion.div>
 
-      {/* Bento Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 auto-rows-[minmax(180px,auto)]">
         {/* Card 1 — Large (spans 2 cols, 2 rows) */}
         <motion.div
@@ -101,7 +100,7 @@ export default function BenefitsBento() {
           variants={cardVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className={`col-span-2 row-span-2 rounded-2xl border ${BENEFITS[0].border} ${BENEFITS[0].bg} p-8 flex flex-col justify-between relative overflow-hidden group`}
+          className={`col-span-2 row-span-2 rounded-2xl border ${BENEFITS[0].border} ${BENEFITS[0].bg} p-4 sm:p-8 flex flex-col justify-between relative overflow-hidden group`}
         >
           <div
             className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
@@ -143,7 +142,7 @@ export default function BenefitsBento() {
           variants={cardVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className={`col-span-1 row-span-1 rounded-2xl border ${BENEFITS[1].border} ${BENEFITS[1].bg} p-6 flex flex-col justify-between relative overflow-hidden group`}
+          className={`col-span-1 row-span-1 rounded-2xl border ${BENEFITS[1].border} ${BENEFITS[1].bg} p-3 sm:p-6 flex flex-col justify-between relative overflow-hidden group`}
         >
           <span className="text-2xl" style={{ color: BENEFITS[1].accent }}>
             {BENEFITS[1].icon}
@@ -152,7 +151,7 @@ export default function BenefitsBento() {
             <span className="text-[8px] tracking-[0.45em] uppercase text-white/30 mb-1 block">
               {BENEFITS[1].eyebrow}
             </span>
-            <h3 className="font-display text-4xl text-white/90 leading-none">
+            <h3 className="font-display text-3xl sm:text-4xl text-white/90 leading-none">
               {BENEFITS[1].title}
             </h3>
             <p className="text-xs text-white/40 mt-2 font-light leading-relaxed">
@@ -167,7 +166,7 @@ export default function BenefitsBento() {
           variants={cardVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className={`col-span-1 row-span-1 rounded-2xl border ${BENEFITS[2].border} ${BENEFITS[2].bg} p-6 flex flex-col justify-between relative overflow-hidden`}
+          className={`col-span-1 row-span-1 rounded-2xl border ${BENEFITS[2].border} ${BENEFITS[2].bg} p-3 sm:p-6 flex flex-col justify-between relative overflow-hidden`}
         >
           <span className="text-2xl" style={{ color: BENEFITS[2].accent }}>
             {BENEFITS[2].icon}
@@ -179,7 +178,7 @@ export default function BenefitsBento() {
             >
               {BENEFITS[2].eyebrow}
             </span>
-            <h3 className="font-display text-4xl text-white/90 leading-none whitespace-pre-line">
+            <h3 className="font-display text-3xl sm:text-4xl text-white/90 leading-none whitespace-pre-line">
               {BENEFITS[2].title}
             </h3>
             <p className="text-xs text-white/40 mt-2 font-light">
@@ -194,7 +193,7 @@ export default function BenefitsBento() {
           variants={cardVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className={`col-span-2 md:col-span-2 row-span-1 rounded-2xl border ${BENEFITS[3].border} ${BENEFITS[3].bg} p-7 flex flex-col sm:flex-row sm:items-end justify-between gap-6 relative overflow-hidden group`}
+          className={`col-span-2 md:col-span-2 row-span-1 rounded-2xl border ${BENEFITS[3].border} ${BENEFITS[3].bg} p-3.5 sm:p-7 flex flex-col sm:flex-row sm:items-end justify-between gap-6 relative overflow-hidden group`}
         >
           <div
             className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"

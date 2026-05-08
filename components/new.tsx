@@ -3,7 +3,7 @@ import React from "react";
 
 const New = () => {
   return (
-    <section className="relative bg-black pb-32 px-6 flex flex-col items-center text-center">
+    <section className="relative bg-black pb-28 px-6 flex flex-col items-center text-center">
       <div
         aria-hidden
         className="pointer-events-none absolute top-20 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full"

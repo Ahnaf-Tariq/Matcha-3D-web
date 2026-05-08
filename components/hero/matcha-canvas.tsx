@@ -130,20 +130,29 @@ export default function MatchaCanvas() {
 
     if (!ctx) return;
 
-    const { width, height } = canvas;
+    const cssW = canvas.offsetWidth;
+    const cssH = canvas.offsetHeight;
+    const dpr = window.devicePixelRatio || 1;
+    const pw = cssW * dpr;
+    const ph = cssH * dpr;
 
-    const scale = Math.min(
-      width / img.naturalWidth,
-      height / img.naturalHeight,
-    );
+    if (canvas.width !== pw || canvas.height !== ph) {
+      canvas.width = pw;
+      canvas.height = ph;
+    }
 
-    const drawW = img.naturalWidth * scale;
-    const drawH = img.naturalHeight * scale;
+    ctx.clearRect(0, 0, pw, ph);
 
-    const offsetX = (width - drawW) / 2;
-    const offsetY = (height - drawH) / 2;
+    const imgW = img.naturalWidth;
+    const imgH = img.naturalHeight;
 
-    ctx.clearRect(0, 0, width, height);
+    const scale = Math.max(pw / imgW, ph / imgH);
+
+    const drawW = imgW * scale;
+    const drawH = imgH * scale;
+
+    const offsetX = (pw - drawW) / 2;
+    const offsetY = (ph - drawH) / 2;
 
     ctx.drawImage(img, offsetX, offsetY, drawW, drawH);
   }, []);
@@ -154,19 +163,10 @@ export default function MatchaCanvas() {
     if (!canvas) return;
 
     const resize = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-
-      const ctx = canvas.getContext("2d");
-
-      if (ctx) ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-
       if (lastFrameRef.current >= 0) {
         drawFrame(lastFrameRef.current);
       }
     };
-
-    resize();
 
     const ro = new ResizeObserver(resize);
 
@@ -216,7 +216,7 @@ export default function MatchaCanvas() {
         {!isLoaded && <LoadingScreen progress={loadProgress} />}
       </AnimatePresence>
 
-      <div ref={wrapperRef} className="relative h-[400vh] ">
+      <div ref={wrapperRef} className="relative h-[400vh] mt-10">
         <div className="sticky top-0 h-screen w-full overflow-hidden">
           <canvas
             ref={canvasRef}
@@ -231,8 +231,6 @@ export default function MatchaCanvas() {
                 "radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.65) 100%)",
             }}
           />
-
-          <div className="absolute top-0 inset-x-0 h-px bg-[#4ADE80]/30" />
 
           <motion.div
             className="absolute bottom-8 inset-x-0 flex flex-col items-center gap-2 pointer-events-none select-none"
