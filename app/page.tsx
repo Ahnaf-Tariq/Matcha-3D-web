@@ -1,18 +1,24 @@
-import MatchaCanvas from "@/components/matcha-canvas";
+import BenefitsBento from "@/components/benefit-bento";
+import ExperienceSection from "@/components/experience-section";
+import MatchaCanvas from "@/components/hero/matcha-canvas";
+import Navbar from "@/components/navbar/navbar";
 import New from "@/components/new";
-import Image from "next/image";
+import ProcessSection from "@/components/process-section";
+import ShopSection from "@/components/shop-section";
 
 export default function Home() {
   return (
     <main className="bg-black min-h-screen">
+      <Navbar />
+
       <MatchaCanvas />
 
       <div style={{ marginTop: "100px" }} className="space-y-10">
-        {" "}
         <New />
-        <New />
-        <New />
-        <New />
+        <BenefitsBento />
+        <ExperienceSection />
+        <ProcessSection />
+        <ShopSection />
       </div>
 
       <footer className="bg-black border-t border-white/5 py-10 px-6 flex flex-col sm:flex-row items-center justify-between gap-4">

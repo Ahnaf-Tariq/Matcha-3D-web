@@ -1,11 +1,12 @@
+import { ArrowRight } from "lucide-react";
 import React from "react";
 
 const New = () => {
   return (
-    <section className="relative bg-black border-t border-white/5 py-32 px-6 flex flex-col items-center text-center">
+    <section className="relative bg-black pb-32 px-6 flex flex-col items-center text-center">
       <div
         aria-hidden
-        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full"
+        className="pointer-events-none absolute top-20 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full"
         style={{
           background:
             "radial-gradient(circle, rgba(74,222,128,0.12) 0%, transparent 70%)",
@@ -28,18 +29,17 @@ const New = () => {
 
       <a
         href="#"
-        className="mt-10 group inline-flex items-center gap-3 border border-[#4ADE80]/50 hover:border-[#4ADE80] text-[#4ADE80] text-xs tracking-[0.3em] uppercase px-8 py-4 transition-all duration-300 hover:bg-[#4ADE80]/5"
+        className="mt-10 group inline-flex items-center gap-1.5 border border-[#4ADE80]/50 hover:border-[#4ADE80] text-[#4ADE80] text-xs tracking-[0.3em] uppercase px-8 py-4 transition-all duration-300 hover:bg-[#4ADE80]/5"
       >
         Order Now
         <span
           className="inline-block translate-x-0 group-hover:translate-x-1 transition-transform duration-300"
           aria-hidden
         >
-          →
+          <ArrowRight className="size-3.5" />
         </span>
       </a>
 
-      {/* Stats row */}
       <div className="mt-24 grid grid-cols-3 gap-12 border-t border-white/5 pt-16 w-full max-w-lg">
         {[
           { value: "100%", label: "Ceremonial Grade" },
