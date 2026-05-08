@@ -144,6 +144,13 @@ export default function BenefitsBento() {
           animate={inView ? "visible" : "hidden"}
           className={`col-span-1 row-span-1 rounded-2xl border ${BENEFITS[1].border} ${BENEFITS[1].bg} p-3 sm:p-6 flex flex-col justify-between relative overflow-hidden group`}
         >
+          <div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+            style={{
+              background:
+                "radial-gradient(ellipse at 30% 30%, rgba(255,255,255,0.04) 0%, transparent 70%)",
+            }}
+          />
           <span className="text-2xl" style={{ color: BENEFITS[1].accent }}>
             {BENEFITS[1].icon}
           </span>
@@ -166,8 +173,15 @@ export default function BenefitsBento() {
           variants={cardVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className={`col-span-1 row-span-1 rounded-2xl border ${BENEFITS[2].border} ${BENEFITS[2].bg} p-3 sm:p-6 flex flex-col justify-between relative overflow-hidden`}
+          className={`col-span-1 row-span-1 rounded-2xl border ${BENEFITS[2].border} ${BENEFITS[2].bg} p-3 sm:p-6 flex flex-col justify-between relative overflow-hidden group`}
         >
+          <div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+            style={{
+              background:
+                "radial-gradient(ellipse at 30% 30%, rgba(74,222,128,0.06) 0%, transparent 70%)",
+            }}
+          />
           <span className="text-2xl" style={{ color: BENEFITS[2].accent }}>
             {BENEFITS[2].icon}
           </span>
@@ -199,7 +213,7 @@ export default function BenefitsBento() {
             className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
             style={{
               background:
-                "radial-gradient(ellipse at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 60%)",
+                "radial-gradient(ellipse at 30% 30%, rgba(255,255,255,0.04) 0%, transparent 70%)",
             }}
           />
           <div>
