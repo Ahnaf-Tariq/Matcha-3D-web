@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, Variants } from "framer-motion";
 
 const BENEFITS = [
   {
@@ -46,12 +46,18 @@ const BENEFITS = [
   },
 ];
 
-const cardVariants = {
+const easing: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 32 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.1, duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+    transition: {
+      delay: i * 0.1,
+      duration: 0.65,
+      ease: easing,
+    },
   }),
 };
 
@@ -208,7 +214,7 @@ export default function BenefitsBento() {
               {BENEFITS[3].title}
             </h3>
           </div>
-          <p className="text-xs text-white/40 font-light leading-relaxed max-w-[220px] shrink-0">
+          <p className="text-xs text-white/40 font-light leading-relaxed max-w-55 shrink-0">
             {BENEFITS[3].body}
           </p>
         </motion.div>

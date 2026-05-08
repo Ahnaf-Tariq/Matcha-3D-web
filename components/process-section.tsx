@@ -39,7 +39,7 @@ export default function ProcessSection() {
   const inView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <section ref={sectionRef} className="relative py-28 overflow-hidden">
+    <section ref={sectionRef} className="relative pt-10 pb-28 overflow-hidden">
       {/* Background accent */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -50,7 +50,7 @@ export default function ProcessSection() {
       />
 
       {/* Section Header */}
-      <div className="px-5 sm:px-10 max-w-7xl mx-auto mb-20">
+      <div className="px-5 sm:px-10 max-w-7xl mx-auto mb-12">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
